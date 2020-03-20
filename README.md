@@ -1,5 +1,14 @@
 # SARS-CoV-2
-For the [#WIRVSVIRUS Hackathon](https://wirvsvirushackathon.org/)
+For the [#WIRVSVIRUS Hackathon](https://wirvsvirushackathon.org/) 
+- tackling project 46 on slack, the [COVID-19 Clusterdiagramm für Deutschland](https://airtable.com/shrs71ccUVKyvLlUA/tbl6Br4W3IyPGk1jt/viwk1wafE5cvUwOr7?blocks=hide)
+- Visit us on [Devpost](https://devpost.com/software/corona-cases-forecasting-for-germany-on-a-county-level#updates)
+
+## Corona Cases Forecasting for Germany on a County Level
+
+[Slack project 46](https://airtable.com/shrs71ccUVKyvLlUA/tbl6Br4W3IyPGk1jt/viwk1wafE5cvUwOr7?blocks=hide):
+#### COVID-19 Clusterdiagramm für Deutschland
+
+
 #### Ideas:
 Forecasting of Corona cases based on
 1) Data from Telekom:
