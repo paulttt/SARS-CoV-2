@@ -29,18 +29,27 @@ Forecasting of Corona cases based on
 
 
 #### to do:
-Henrik: - look at/visualize John Hopkins dataset
-Paul: 
-Dan: - look at/visualize Geodataset
+Henrik: 
+- look at/visualize John Hopkins dataset <br/>
+
+Paul: <br/>
+
+Dan: 
+- look at/visualize Geodataset
+
+Ralph:
+- netflix 
 
 
 #### other ideas to help: 
 Building an app to help track sick people
 1) from Hochschule Hannover/ Unilabs: [geoHealthApp](https://www.geohealthapp.de/)
-- read also this [article](https://www.heise.de/newsticker/meldung/Medizinische-Hochschule-Hannover-und-Ubilabs-entwickeln-Corona-App-4680487.html)
+
+- more details in this [article](https://www.heise.de/newsticker/meldung/Medizinische-Hochschule-Hannover-und-Ubilabs-entwickeln-Corona-App-4680487.html)
 - needs voluntary local-history-location data from sick people
 - launch in 2 weeks
 - not sure if collected data is freely available
+
 2) from South Korea ??
 
 
