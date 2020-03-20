@@ -14,6 +14,8 @@ Es wird eine Lösung gesucht, die die feingranulare Vorhersage der zu erwarteten
 #### Solution:
 Das Robert Koch Institut veröffentlicht [tägliche Momentaufnahmen](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Situationsberichte/2020-03-18-de.pdf?__blob=publicationFile) des Infektionsverlaufes bis auf Landkreisebene, jedoch keine Vorhersagen. Die Süddeutsche Zeitung betrachtet als einzige (?) deutsche Publikation die [Trendentwicklung](https://www.sueddeutsche.de/thema/Coronavirus), jedoch nur bundesweit und nur auf drei Granularitätsstufen. Die US-amerikanische Johns Hopkins Universität stellt [stündliche Momentaufnahmen](https://coronavirus.jhu.edu/map.html) des weltweiten Infektionsverlaufes zusammen. Diverse zumeist individuelle online Data-Science-Projekte, zumeist aus dem nordamerikanischem Raum, erstellen Vorhersagen, jedoch nicht auf einem für deutsche Entscheidungsträger relevanten Granularitätsgrad.
 
+Also have a look at this interesing [Dashboard](https://experience.arcgis.com/experience/478220a4c454480e823b17327b2bf1d4/page/page_1/) about German Corona data by County
+
 
 
 
