@@ -37,6 +37,10 @@ Forecasting of Corona cases based on
 1) [John Hopkins dataset](https://github.com/CSSEGISandData/COVID-19)
 2) [Kaggle dataset](https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset)
 3) [#WIRVSVIRUS website](https://wirvsvirushackathon.org/ressourcen/)
+4) [Statista] (https://de.statista.com)
+5) [GovData] (https://www.govdata.de)
+6) [Informationssystem der
+Gesundheitsberichterstattung des Bundes] (http://www.gbe-bund.de/gbe10/pkg_isgbe5.prc_isgbe?p_uid=gast&p_aid=24350729&p_sprache=D)
 - many different datasets based on the challenge
 
 ###### not so useful:
