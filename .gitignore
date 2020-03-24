@@ -1,0 +1,9 @@
+# macOS files
+.DS_Store
+
+# python compile files
+*.pyc
+
+# misc
+*.ignore
+ignore*
