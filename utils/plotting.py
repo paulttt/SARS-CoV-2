@@ -28,7 +28,6 @@ top_cities = {
 #         df_county:    dataframe with geometry information about the counties
 #         feature:      string        name of column that is plotted: (e.g. AnzahlFall)
 def plot_map(df_county, feature):
-    plt.rcParams['figure.figsize'] = [16, 11]
     fig, ax = plt.subplots()
 
     df_county.plot(
