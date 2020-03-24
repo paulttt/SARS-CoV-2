@@ -1,3 +1,7 @@
+"""
+function lib to centralize path references to .txt, .csv, binaries etc.
+Author: Theo Bernier - theo.ju.bern@gmail.com
+"""
 from pathlib import Path
 
 ROOT_PATH = Path.cwd().parent
