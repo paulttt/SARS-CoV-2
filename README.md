@@ -22,6 +22,9 @@ Also have a look at this interesing [Dashboard](https://experience.arcgis.com/ex
 
 ##### Ideas:
 Forecasting of Corona cases based on
+
+1) Epidemological SEIR model
+We want to model every county's infected cases as a Markov Chain process, where the observed variables is the data from the RKI and the hidden states are the true unknown population that are infected with the virus. Since in many cities the testing capabilities are limited or people don't have symptoms, these numbers shall be modeled in the hidden states variables. The most important parameter for describing hidden state change transitions is the transmission rate R. This rate is highly influenced by the behaviour of the people and political mitigation actions. We want to describe the R variable as a probabilistic variable that is evaluated in a Bayesian framework given the observed data at every time step.
 1) Data from Telekom:
 	- here is an [article](https://www.heise.de/newsticker/meldung/Corona-Krise-Deutsche-Telekom-liefert-anonymisierte-Handydaten-an-RKI-4685191.html)
 	- dataset not available yet???
@@ -77,5 +80,10 @@ Building an app to help track sick people
 2) from South Korea ??
 
 
-
+### Reference
+1) [Epidemic Calculator based on SEIR model](http://gabgoh.github.io/COVID/index.html)
+2) [Modeling the Coronavirus pandemic in a city with python](https://towardsdatascience.com/modelling-the-coronavirus-epidemic-spreading-in-a-city-with-python-babd14d82fa2)
+3) [Nowcasting and forecasting the potential domestic and international spread of the 2019-nCoV outbreak originating in Wuhan, China: a modelling study](https://www.thelancet.com/action/showPdf?pii=S0140-6736%2820%2930260-9)
+4) [Analysis and projections of transmission dynamics of nCoV in Wuhan](https://cmmid.github.io/topics/covid19/current-patterns-transmission/wuhan-early-dynamics.html)
+5) [Introduction to particle Markov-chain Monte Carlo for disease dynamics modellers](https://www.sciencedirect.com/science/article/pii/S1755436519300301)
 
