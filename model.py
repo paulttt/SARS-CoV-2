@@ -65,6 +65,10 @@ class SEIRModel():
             self.i[t + 1] = self.i[t] + self.sigma * self.e[t] - self.gamma * self.i[t]
             self.r[t + 1] = self.r[t] + self.gamma * self.i[t]
 
+        '''
+            Applying a differnential equation solver (e.g. Runge–Kutta methods) 
+        '''
+
 
     # Helper functions
     def visulatization(self):
