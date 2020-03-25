@@ -6,13 +6,17 @@ from pathlib import Path
 
 ROOT_PATH = Path.cwd().parent
 DATA_PATH = ROOT_PATH.joinpath("data")
+BACKUPDATA_PATH = DATA_PATH.joinpath(".backup")
+
+def get_backupData_path():
+    return BACKUPDATA_PATH
 
 def get_RKI_file():
     RKI_fileName = "RKI_COVID19.csv"
     return DATA_PATH.joinpath(RKI_fileName)
 
 def get_RKI_landkreise_file():
-    RKI_landkreise_fileName = "RKI_Corona_Landkreise.csv"
+    RKI_landkreise_fileName = "RKI_Corona_Landkreise_updated.csv"
     return DATA_PATH.joinpath(RKI_landkreise_fileName)
 
 def get_Landkreise_file():
