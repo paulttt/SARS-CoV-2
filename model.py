@@ -33,6 +33,14 @@ class SEIRModel():
         # mu: The natural mortality rate (this is unrelated to disease).
         self.mu = 0.0
 
+        # t_inc: length of incubation period
+        self.t_inc = 14
+        # t_inf: Duration patient is infectious
+        self.t_inf = 10
+
+        # r_t: Basic reproduction number (measure of contagiousness)
+        self.r_t = None
+
         # Initial susceptible: The number of susceptible individuals at the beginning of the model run.
         self.s[0] = 1e7 / self.N
         # Initial exposed: The number of exposed individuals at the beginning of the model run.
@@ -60,9 +68,11 @@ class SEIRModel():
         ax.plot(self.e, c='orange', lw=2, label='E')
         ax.plot(self.i, c='r', lw=2, label='I')
         ax.plot(self.r, c='g', lw=2, label='R')
+
         ax.set_xlabel('Day', fontsize=10)
-        ax.set_ylabel('individuals', fontsize=10)
+        ax.set_ylabel('Individuals', fontsize=10)
         ax.grid()
+
         plt.xticks(fontsize=20)
         plt.yticks(fontsize=20)
         plt.legend()
