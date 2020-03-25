@@ -6,14 +6,37 @@ class SEIRModel():
     '''
     Object representing the SEIR model functioning as an epidemic calculator.
     '''
-    def __init__(self, population, num_steps):
-        # population
-        self.N = population
+    def __init__(self, num_steps, population, init_inf, t_inc, t_inf, r_0, mu, t_rec, ):
+        ### General ###
         # simulation time per day
         self.num_steps = num_steps
 
+        ### Transmission Dynamics ###
+        # population
+        self.N = population
         # Initial infection count
-        self.i_start = 1
+        self.init_inf = init_inf
+        # t_inc: length of incubation period
+        self.t_inc = t_inc
+        # t_inf: Duration patient is infectious
+        self.t_inf = t_inf
+        # r_t: Basic reproduction number (measure of contagiousness)
+        self.r_0 = r_0
+
+        ### Clinical Dynamics ###
+        # mu: The natural mortality rate (this is unrelated to disease).
+        self.mu = mu
+        # t_rec: Recovery Times - Length of hospital stay
+        self.t_rec = t_rec
+
+
+        # beta: The parameter controlling how often a susceptible-infected contact results in a new exposure.
+        self.beta = 0.0
+        # gamma: The rate an infected recovers and moves into the resistant phase.
+        self.gamma = 0.0
+        # sigma: The rate at which an exposed person becomes infective.
+        self.sigma = 0.0
+
 
         # susceptiable ratio
         self.s = np.zeros([self.num_steps])
@@ -24,29 +47,12 @@ class SEIRModel():
         # remove ratio
         self.r = np.zeros([self.num_steps])
 
-        # beta: The parameter controlling how often a susceptible-infected contact results in a new exposure.
-        self.beta = 0.0
-        # gamma: The rate an infected recovers and moves into the resistant phase.
-        self.gamma = 0.0
-        # sigma: The rate at which an exposed person becomes infective.
-        self.sigma = 0.0
-        # mu: The natural mortality rate (this is unrelated to disease).
-        self.mu = 0.0
-
-        # t_inc: length of incubation period
-        self.t_inc = 14
-        # t_inf: Duration patient is infectious
-        self.t_inf = 10
-
-        # r_t: Basic reproduction number (measure of contagiousness)
-        self.r_t = None
-
         # Initial susceptible: The number of susceptible individuals at the beginning of the model run.
         self.s[0] = 1e7 / self.N
         # Initial exposed: The number of exposed individuals at the beginning of the model run.
         self.e[0] = 40.0 / self.N
         # Initial infected: The number of infected individuals at the beginning of the model run.
-        self.i[0] = self.i_start / self.N
+        self.i[0] = self.init_inf / self.N
         # Initial recovered: The number of recovered individuals at the beginning of the model run.
         self.r[0] = 0.0 / self.N
 
