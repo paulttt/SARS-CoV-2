@@ -42,6 +42,7 @@ class SEIRModel():
         # Initial recovered: The number of recovered individuals at the beginning of the model run.
         self.r[0] = 0.0 / self.N
 
+
     def run(self):
         # Running the calcuation.
         for t in range(self.num_steps - 1):
@@ -50,6 +51,8 @@ class SEIRModel():
             self.i[t + 1] = self.i[t] + self.sigma * self.e[t] - self.gamma * self.i[t]
             self.r[t + 1] = self.r[t] + self.gamma * self.i[t]
 
+
+    # Helper functions
     def visulatization(self):
         # Visualizing the process. Just for testing it in the beginning.
         fig, ax = plt.subplots(figsize=(14,6))
