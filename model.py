@@ -6,7 +6,7 @@ class SEIRModel():
     '''
     Object representing the SEIR model functioning as an epidemic calculator.
     '''
-    def __init__(self, num_steps, population, init_inf, t_inc, t_inf, r_0, mu, t_rec, ):
+    def __init__(self, num_steps, population, init_inf, t_inc, t_inf, r_0, mu, t_rec):
         ### General ###
         # simulation time per day
         self.num_steps = num_steps
@@ -66,7 +66,7 @@ class SEIRModel():
             self.r[t + 1] = self.r[t] + self.gamma * self.i[t]
 
         '''
-            Applying a differnential equation solver (e.g. Runge–Kutta methods) 
+            Applying a differnential equation solver (e.g. Runge–Kutta methods)
         '''
 
 
