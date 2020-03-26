@@ -87,3 +87,9 @@ Building an app to help track sick people
 4) [Analysis and projections of transmission dynamics of nCoV in Wuhan](https://cmmid.github.io/topics/covid19/current-patterns-transmission/wuhan-early-dynamics.html)
 5) [Introduction to particle Markov-chain Monte Carlo for disease dynamics modellers](https://www.sciencedirect.com/science/article/pii/S1755436519300301)
 
+##### SEIR-model explained
+6) [Medium Article: SEIR Model](https://towardsdatascience.com/social-distancing-to-slow-the-coronavirus-768292f04296)
+7) [SEIR model: Brief Introduction](http://www.public.asu.edu/~hnesse/classes/seir.html)
+
+##### Parameter Distribution
+8) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
