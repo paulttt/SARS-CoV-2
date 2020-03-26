@@ -134,3 +134,11 @@ Author: Daniel Illner - illner.d@protonmail.com
   width: 170px;
   margin: 20px auto 5px;
 }
+
+/* ----- Footer ----- */
+#Footer
+{
+  background: #333;
+  color: #fff;
+  padding: 8px;
+}
