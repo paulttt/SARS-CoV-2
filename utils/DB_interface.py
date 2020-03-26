@@ -7,7 +7,7 @@ from arcgis.gis import GIS
 import os
 from shutil import copyfile
 import pandas as pd
-import path_config as pc
+from . import path_config as pc
 from datetime import datetime
 
 
@@ -37,7 +37,7 @@ class DB_interface:
         RKI_landkreise_file = pc.get_RKI_landkreise_file()
         now = str(datetime.now()).replace(" ", "_")
         now = now.replace(":","_")
-        now = now[:18]
+        now = now[:19]
         backupFileName = "RKI_landkreise_up_to_"+now+".csv"
         backupFilePath = pc.get_backupData_path().joinpath(backupFileName)
 
