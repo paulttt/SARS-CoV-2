@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from data_utils import *
 
 
 class SEIRModel():
@@ -7,13 +8,15 @@ class SEIRModel():
     Object representing the SEIR model functioning as an epidemic calculator.
     '''
     def __init__(self, num_steps, population, init_inf, t_inc, t_inf, r_0, mu, t_rec):
+        ### Call the DataLoader ###
+        db = DataLoader()
         ### General ###
         # simulation time per day
         self.num_steps = num_steps
 
         ### Transmission Dynamics ###
         # population
-        self.N = population
+        self.N = db.compute_population()
         # Initial infection count
         self.init_inf = init_inf
         # t_inc: length of incubation period
