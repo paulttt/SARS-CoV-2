@@ -38,7 +38,21 @@ We want to model every county's infected cases as a Markov Chain process, where 
 ##### Parameter Distribution
 9) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
 
-#### Datasets
+#### Datasets and APIs 
+
+1) [RKI Covid-19 API](https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0)
+- Meldedatum, Landkreis, IDLandkreis, Altersgruppe, Geschlecht, AnzahlFall, AnzahlTodesfall,...
+2) [RKI Corona Landkreise API](https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0)
+3) [Corona API](https://github.com/CoronaAPI)
+- API, die versucht so viele Informationen wie möglich bereitzustellen. Auch für andere Länder. Granularität bis auf  Landkreisebene
+4) [Dataset that tracks the political restriction for each country](https://www.bsg.ox.ac.uk/research/research-projects/oxford-covid-19-government-response-tracker)
+5) [Hackathon API-Action, Cases, Measures, Population](https://bene.gridpiloten.de:4712/api/ui/#/Source)
+6) [Krankenhäsuer in Deutschalnd mit Geo- und Ausstattungsinformation](https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/348b643c8b234cdc8b1b345210975b87_0?geometry=-21.311%2C46.261%2C42.365%2C55.880)
+- keine Live Info zu Intensivbettenbelegung etc.
+
+#### Other useful ressources
+
+##### Datasets
 1) [John Hopkins dataset](https://github.com/CSSEGISandData/COVID-19)
 2) [Kaggle dataset](https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset)
 3) [#WIRVSVIRUS website](https://wirvsvirushackathon.org/ressourcen/)
@@ -47,13 +61,11 @@ We want to model every county's infected cases as a Markov Chain process, where 
 6) [Informationssystem der
 Gesundheitsberichterstattung des Bundes](http://www.gbe-bund.de/gbe10/pkg_isgbe5.prc_isgbe?p_uid=gast&p_aid=24350729&p_sprache=D)
 7) [Corona Wiki-Datenquellen](https://coronawiki.net/index.php?title=Datenquellen)
-8) [Live Dataset that tracks the political restriction for each country](https://www.bsg.ox.ac.uk/research/research-projects/oxford-covid-19-government-response-tracker)
 9) [Data from Telekom?!](https://www.heise.de/newsticker/meldung/Corona-Krise-Deutsche-Telekom-liefert-anonymisierte-Handydaten-an-RKI-4685191.html)
 
 ##### APIs
 1) [Database on Live Cases sorted on Landkreise with population info](https://public.fusionbase.io/explore/covid19-germany/data)
-2) [Hackathon API-Action, Cases, Measures, Population](https://bene.gridpiloten.de:4712/api/ui/#/Source)
-3) [Krankenhäsuer in Deutschalnd mit Geo- und Ausstattungsinformation](https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/348b643c8b234cdc8b1b345210975b87_0?geometry=-21.311%2C46.261%2C42.365%2C55.880)
+
 
 #### ToDo
 Henrik: 
