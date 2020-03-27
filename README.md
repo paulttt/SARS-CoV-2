@@ -18,9 +18,25 @@ Es wird eine Lösung gesucht, die die feingranulare Vorhersage der zu erwarteten
 #### Solution Idea(s):
 Forecasting of Corona cases based on
 
-1) Epidemological SEIR model + Particle Markov Chain Monte Carlo (PMCMC) modeling
+##### Epidemological SEIR model + Particle Markov Chain Monte Carlo (PMCMC) Modeling
 We want to model every county's infected cases as a Markov Chain process, where the observed variables is the data from the RKI and the hidden states are the true unknown population that are infected with the virus. Since in many cities the testing capabilities are limited or people don't have symptoms, these numbers shall be modeled in the hidden states variables. The most important parameter for describing hidden state change transitions is the transmission rate R. This rate is highly influenced by the behaviour of the people and political mitigation actions. We want to describe the R variable as a probabilistic variable that is evaluated in a Bayesian framework given the observed data at every time step. From the hidden states we employ a function that models the probability of how likely it is that a person that is infected with the Virus also gets a positive test result. For this we take in the information about test capacities per day/week per country. Furthermore we want to also include a term in the differential equation that includes the spatial connectivity and traffic flows between the counties. With that information we can better predict the spread of the virus between the counties.
 
+
+
+### References
+1) [Epidemic Calculator based on SEIR model](http://gabgoh.github.io/COVID/index.html)
+2) [Modeling the Coronavirus pandemic in a city with python](https://towardsdatascience.com/modelling-the-coronavirus-epidemic-spreading-in-a-city-with-python-babd14d82fa2)
+3) [Nowcasting and forecasting the potential domestic and international spread of the 2019-nCoV outbreak originating in Wuhan, China: a modelling study](https://www.thelancet.com/action/showPdf?pii=S0140-6736%2820%2930260-9)
+4) [Analysis and projections of transmission dynamics of nCoV in Wuhan](https://cmmid.github.io/topics/covid19/current-patterns-transmission/wuhan-early-dynamics.html)
+5) [Introduction to particle Markov-chain Monte Carlo for disease dynamics modellers](https://www.sciencedirect.com/science/article/pii/S1755436519300301)
+
+##### SEIR-model explained
+6) [Medium Article: SEIR Model](https://towardsdatascience.com/social-distancing-to-slow-the-coronavirus-768292f04296)
+7) [SEIR model: Brief Introduction](http://www.public.asu.edu/~hnesse/classes/seir.html)
+8) [Adding Local Connectivity into SEIR model](https://www.sciencedirect.com/science/article/abs/pii/S0025556413002113)
+
+##### Parameter Distribution
+9) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
 
 #### Datasets
 1) [John Hopkins dataset](https://github.com/CSSEGISandData/COVID-19)
@@ -38,7 +54,6 @@ Gesundheitsberichterstattung des Bundes](http://www.gbe-bund.de/gbe10/pkg_isgbe5
 1) [Database on Live Cases sorted on Landkreise with population info](https://public.fusionbase.io/explore/covid19-germany/data)
 2) [Hackathon API-Action, Cases, Measures, Population](https://bene.gridpiloten.de:4712/api/ui/#/Source)
 3) [Krankenhäsuer in Deutschalnd mit Geo- und Ausstattungsinformation](https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/348b643c8b234cdc8b1b345210975b87_0?geometry=-21.311%2C46.261%2C42.365%2C55.880)
-
 
 #### ToDo
 Henrik: 
@@ -75,19 +90,3 @@ Building an app to help track sick people
 - not sure if collected data is freely available
 
 2) Learning from South Korea ??
-
-
-### Reference
-1) [Epidemic Calculator based on SEIR model](http://gabgoh.github.io/COVID/index.html)
-2) [Modeling the Coronavirus pandemic in a city with python](https://towardsdatascience.com/modelling-the-coronavirus-epidemic-spreading-in-a-city-with-python-babd14d82fa2)
-3) [Nowcasting and forecasting the potential domestic and international spread of the 2019-nCoV outbreak originating in Wuhan, China: a modelling study](https://www.thelancet.com/action/showPdf?pii=S0140-6736%2820%2930260-9)
-4) [Analysis and projections of transmission dynamics of nCoV in Wuhan](https://cmmid.github.io/topics/covid19/current-patterns-transmission/wuhan-early-dynamics.html)
-5) [Introduction to particle Markov-chain Monte Carlo for disease dynamics modellers](https://www.sciencedirect.com/science/article/pii/S1755436519300301)
-
-##### SEIR-model explained
-6) [Medium Article: SEIR Model](https://towardsdatascience.com/social-distancing-to-slow-the-coronavirus-768292f04296)
-7) [SEIR model: Brief Introduction](http://www.public.asu.edu/~hnesse/classes/seir.html)
-8) [Adding Local Connectivity into SEIR model](https://www.sciencedirect.com/science/article/abs/pii/S0025556413002113)
-
-##### Parameter Distribution
-9) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
