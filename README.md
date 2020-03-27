@@ -1,39 +1,25 @@
 # SARS-CoV-2
 For the [#WIRVSVIRUS Hackathon](https://wirvsvirushackathon.org/) 
-- tackling project 91 on slack, the [COVID-19 Clusterdiagramm für Deutschland](https://airtable.com/shrs71ccUVKyvLlUA/tbl6Br4W3IyPGk1jt/viwk1wafE5cvUwOr7?blocks=hide)
+- tackling Challenge 36 of the Hackathon, the [COVID-19 Clusterdiagramm für Deutschland](https://airtable.com/shrs71ccUVKyvLlUA/tbl6Br4W3IyPGk1jt/viwk1wafE5cvUwOr7?blocks=hide)
 - Visit us on [Devpost](https://devpost.com/software/corona-cases-forecasting-for-germany-on-a-county-level#updates)
 
 ## Corona Cases Forecasting for Germany on a County Level
-#### COVID-19 Clusterdiagramm für Deutschland
+#### Corona Cases Forecasting For Germany On A County Level
 ##### Problems:
-Der Verlauf der Covid-19 Infektionen wird aktuell in Deutschland von staatlicher Seite und durch die Presse überwiegend anhand von statistischen Momentaufnahmen dokumentiert, z.B. durch die täglich aktualisierten Fallzahlen des Robert Koch Instituts (s. https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Fallzahlen.html und nachgeordnete Seiten). Aufgrund des exponentiellen Wachstumsverhaltens der Infektion führen diese Momentaufnahmen allerdings dazu, dass neue Infektionsschwerpunkte nur verzögert erkannt werden und präventive Maßnahmen dadurch zu spät anlaufen. Gleichzeitig sind die Ressourcen für präventive Maßnahmen begrenzt, was eine starke Fokussierung und exzellente Priorisierung erfordert. Hilfreich wäre stattdessen eine feingranulare Vorhersage (Forecast) der Infektionsverläufe (z.B. pro Landkreis, pro demografischer Gruppe, pro Industriebranche, pro Funktion von medizinischem Personal, …) anhand von untertägig aktualisierten Daten.
+The course of Covid-19 infections is currently documented in Germany by the state and by the press mainly using statistical snapshots, e.g. through the [daily updated case numbers of the Robert Koch Institute (RKI)](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Fallzahlen.html). However, due to the exponential growth behavior of the infection, these snapshots mean that new focal points of infection are only recognized with a delay and preventive measures are therefore started too late. At the same time, the resources for preventive measures are limited, which requires a strong focus and excellent prioritization. Instead, a fine-grained prediction (forecast) of the course of infections e.g. per county (german: Landkreise) would be helpful based on data updated during the day. We want to help the Mayors and local decision makers to better anticipate the load of sick people for the near future. As there is also data available on the capacities of Intensive Care Units on a german state level, it might be useful for further development to include a tool that can connect these information and predict early on a shortage in care capacities.
+
 
 ##### Challenge:
+
+A solution is sought which enables the granular prediction of the expected Covid-19 infection courses. The degree of granularity must be so high that effective slowdown and containment measures can be prioritized (geographically at least at the district level, demographically at least according to age and gender, economically according to relevant branches of industry, and according to relevant medical function / qualification, by just a few dimensions to call). The forecasts must update themselves automatically as far as possible based on data sources updated at least once a day and be robust against changes in data format and quality. The epidemological modeling of a disease outbreak on such small scales is challenging. Also we need to consider local connectivity between the counties. Therefore data is needed like live traffic flow or [mobile phone data like the Telekom provided to the RKI](https://www.telekom.com/de/konzern/details/corona-vorhersage-telekom-unterstuetzt-rki-596772)
+The overarching goal is to enable decision-makers in administration, politics and business to better bundle preventive measures so that scarce resources are in the right place at the right time and it is avoided to "run after" the action. 
 Es wird eine Lösung gesucht, die die feingranulare Vorhersage der zu erwarteten Covid-19- Infektionsverläufe ermöglicht. Der Granularitätsgrad muss so hoch sein, dass eine effektive Priorisierung von Maßnahmen zur Verlangsamung und Eindämmung ermöglicht wird (geographisch also mindestens auf Landkreisebene, demographisch mindestens nach Alter und Geschlecht, wirtschaftlich nach relevanten Industriezweigen, sowie nach relevanter medizinischer Funktion/Qualifikation, um nur einige Dimensionen zu nennen). Die Vorhersagen müssen sich anhand von stündlich aktualisierten Datenquellen weitestgehend automatisch aktualisieren und robust gegen Veränderung in Datenformat und -qualität sein. Übergeordnetes Ziel ist es, Entscheidungsträgern in Verwaltung, Politik und Wirtschaft eine bessere Bündelung von präventiven Maßnahmen zu ermöglichen, sodass knappe Ressourcen rechtzeitig am richtigen Ort sind und es vermieden wird dem Geschehen „hinterherzulaufen“.
 
-#### Solution:
-Das Robert Koch Institut veröffentlicht [tägliche Momentaufnahmen](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Situationsberichte/2020-03-18-de.pdf?__blob=publicationFile) des Infektionsverlaufes bis auf Landkreisebene, jedoch keine Vorhersagen. Die Süddeutsche Zeitung betrachtet als einzige (?) deutsche Publikation die [Trendentwicklung](https://www.sueddeutsche.de/thema/Coronavirus), jedoch nur bundesweit und nur auf drei Granularitätsstufen. Die US-amerikanische Johns Hopkins Universität stellt [stündliche Momentaufnahmen](https://coronavirus.jhu.edu/map.html) des weltweiten Infektionsverlaufes zusammen. Diverse zumeist individuelle online Data-Science-Projekte, zumeist aus dem nordamerikanischem Raum, erstellen Vorhersagen, jedoch nicht auf einem für deutsche Entscheidungsträger relevanten Granularitätsgrad.
-
-Also have a look at this interesing [Dashboard](https://experience.arcgis.com/experience/478220a4c454480e823b17327b2bf1d4/page/page_1/) about German Corona data by County
-
-
-
-
-
-##### Ideas:
+#### Solution Idea(s):
 Forecasting of Corona cases based on
 
-1) Epidemological SEIR model
-We want to model every county's infected cases as a Markov Chain process, where the observed variables is the data from the RKI and the hidden states are the true unknown population that are infected with the virus. Since in many cities the testing capabilities are limited or people don't have symptoms, these numbers shall be modeled in the hidden states variables. The most important parameter for describing hidden state change transitions is the transmission rate R. This rate is highly influenced by the behaviour of the people and political mitigation actions. We want to describe the R variable as a probabilistic variable that is evaluated in a Bayesian framework given the observed data at every time step.
-1) Data from Telekom:
-	- here is an [article](https://www.heise.de/newsticker/meldung/Corona-Krise-Deutsche-Telekom-liefert-anonymisierte-Handydaten-an-RKI-4685191.html)
-	- dataset not available yet???
-	- contains averaged mobility information from groups of 30
-2) Data from [John Hopkins](https://github.com/CSSEGISandData/COVID-19)
-
-
-
-
+1) Epidemological SEIR model + Particle Markov Chain Monte Carlo (PMCMC) modeling
+We want to model every county's infected cases as a Markov Chain process, where the observed variables is the data from the RKI and the hidden states are the true unknown population that are infected with the virus. Since in many cities the testing capabilities are limited or people don't have symptoms, these numbers shall be modeled in the hidden states variables. The most important parameter for describing hidden state change transitions is the transmission rate R. This rate is highly influenced by the behaviour of the people and political mitigation actions. We want to describe the R variable as a probabilistic variable that is evaluated in a Bayesian framework given the observed data at every time step. From the hidden states we employ a function that models the probability of how likely it is that a person that is infected with the Virus also gets a positive test result. For this we take in the information about test capacities per day/week per country. Furthermore we want to also include a term in the differential equation that includes the spatial connectivity and traffic flows between the counties. With that information we can better predict the spread of the virus between the counties.
 
 
 #### Datasets
@@ -44,28 +30,39 @@ We want to model every county's infected cases as a Markov Chain process, where 
 5) [GovData](https://www.govdata.de)
 6) [Informationssystem der
 Gesundheitsberichterstattung des Bundes](http://www.gbe-bund.de/gbe10/pkg_isgbe5.prc_isgbe?p_uid=gast&p_aid=24350729&p_sprache=D)
-- many different datasets based on the challenge
+7) [Corona Wiki-Datenquellen](https://coronawiki.net/index.php?title=Datenquellen)
+8) [Live Dataset that tracks the political restriction for each country](https://www.bsg.ox.ac.uk/research/research-projects/oxford-covid-19-government-response-tracker)
+9) [Data from Telekom?!](https://www.heise.de/newsticker/meldung/Corona-Krise-Deutsche-Telekom-liefert-anonymisierte-Handydaten-an-RKI-4685191.html)
 
-###### not so useful:
-- [Italy dataset](https://github.com/pcm-dpc/COVID-19)
-- [California dataset]()
+##### APIs
+1) [Database on Live Cases sorted on Landkreise with population info](https://public.fusionbase.io/explore/covid19-germany/data)
+2) [Hackathon API-Action, Cases, Measures, Population](https://bene.gridpiloten.de:4712/api/ui/#/Source)
+3) [Krankenhäsuer in Deutschalnd mit Geo- und Ausstattungsinformation](https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/348b643c8b234cdc8b1b345210975b87_0?geometry=-21.311%2C46.261%2C42.365%2C55.880)
 
 
-
-
-
-
-#### to do:
+#### ToDo
 Henrik: 
-- look at/visualize John Hopkins dataset <br/>
+- Further specification of the SEIR and PMCMC model
+- implementation with pystan
+- Setup of probabilistic framework of the SEIR model
+- prior distribution w.r.t. test capacity in Germany
 
-Paul: <br/>
+Paul: 
+- Further specification of the SEIR and PMCMC model
+- Research on including local connectivity between Landkreise in the model
+- gather new data sources/APIs
+- documentation of the model
+
+Theo: 
+- Setup of APIs and Database
+- Setup of Dashboard with flask
 
 Dan: 
-- look at/visualize Geodataset
+- visualize Geodataset
+- html website
 
 Ralph:
-- netflix 
+- organisation and coordination. Gather Informations. 
 
 
 #### other ideas to help: 
@@ -77,7 +74,7 @@ Building an app to help track sick people
 - launch in 2 weeks
 - not sure if collected data is freely available
 
-2) from South Korea ??
+2) Learning from South Korea ??
 
 
 ### Reference
@@ -90,6 +87,7 @@ Building an app to help track sick people
 ##### SEIR-model explained
 6) [Medium Article: SEIR Model](https://towardsdatascience.com/social-distancing-to-slow-the-coronavirus-768292f04296)
 7) [SEIR model: Brief Introduction](http://www.public.asu.edu/~hnesse/classes/seir.html)
+8) [Adding Local Connectivity into SEIR model](https://www.sciencedirect.com/science/article/abs/pii/S0025556413002113)
 
 ##### Parameter Distribution
-8) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
+9) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
