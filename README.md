@@ -1,6 +1,6 @@
 # SARS-CoV-2
 For the [#WIRVSVIRUS Hackathon](https://wirvsvirushackathon.org/) 
-- tackling Challenge 36 of the Hackathon, the [COVID-19 Clusterdiagramm für Deutschland](https://airtable.com/shrs71ccUVKyvLlUA/tbl6Br4W3IyPGk1jt/viwk1wafE5cvUwOr7?blocks=hide)
+- tackling Challenge 36 of the Hackathon
 - Visit us on [Devpost](https://devpost.com/software/corona-cases-forecasting-for-germany-on-a-county-level#updates)
 
 ## Corona Cases Forecasting for Germany on a County Level
