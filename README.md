@@ -29,15 +29,16 @@ We want to model every county's infected cases as a Markov Chain process, where 
 3) [Nowcasting and forecasting the potential domestic and international spread of the 2019-nCoV outbreak originating in Wuhan, China: a modelling study](https://www.thelancet.com/action/showPdf?pii=S0140-6736%2820%2930260-9)
 4) [Analysis and projections of transmission dynamics of nCoV in Wuhan](https://cmmid.github.io/topics/covid19/current-patterns-transmission/wuhan-early-dynamics.html)
 5) [Introduction to particle Markov-chain Monte Carlo for disease dynamics modellers](https://www.sciencedirect.com/science/article/pii/S1755436519300301)
+6) [Modellierung von Beispielszenarien der SARS-CoV-2-Epidemie 2020 in Deutschland (RKI)](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Modellierung_Deutschland.pdf?__blob=publicationFile)
 
 ##### SEIR-model explained
-6) [Medium Article: SEIR Model](https://towardsdatascience.com/social-distancing-to-slow-the-coronavirus-768292f04296)
-7) [SEIR model: Brief Introduction](http://www.public.asu.edu/~hnesse/classes/seir.html)
-8) [Adding Local Connectivity into SEIR model](https://www.sciencedirect.com/science/article/abs/pii/S0025556413002113)
+7) [Medium Article: SEIR Model](https://towardsdatascience.com/social-distancing-to-slow-the-coronavirus-768292f04296)
+8) [SEIR model: Brief Introduction](http://www.public.asu.edu/~hnesse/classes/seir.html)
+9) [Adding Local Connectivity into SEIR model](https://www.sciencedirect.com/science/article/abs/pii/S0025556413002113)
 
 ##### Parameter Distribution
-9) [Offizielle Angaben des RKI zum SARS-CoV-2 Virus und Studien zum Verlauf der induzierten Covid-19 Erkrankung](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Steckbrief.html#doc13776792bodyText5)
-10) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
+10) [Offizielle Angaben des RKI zum SARS-CoV-2 Virus und Studien zum Verlauf der induzierten Covid-19 Erkrankung](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Steckbrief.html#doc13776792bodyText5)
+11) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
 
 #### Datasets and APIs 
 
