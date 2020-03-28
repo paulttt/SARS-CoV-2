@@ -7,7 +7,7 @@ class SEIRModel():
     '''
     Object representing the SEIR model functioning as an epidemic calculator.
     '''
-    def __init__(self, num_steps, population, init_inf, t_inc, t_inf, r_0, mu, t_rec):
+    def __init__(self, num_steps, init_inf, t_inc, t_inf, r_t, mu, t_rec, rho, kappa_0, kappa):
         ### Call the DataLoader ###
         db = DataLoader()
         ### General ###
@@ -24,7 +24,7 @@ class SEIRModel():
         # t_inf: Duration patient is infectious
         self.t_inf = t_inf
         # r_t: Basic reproduction number (measure of contagiousness)
-        self.r_0 = r_0
+        self.r_0 = r_t
 
         ### Clinical Dynamics ###
         # mu: The natural mortality rate (this is unrelated to disease).
@@ -34,11 +34,11 @@ class SEIRModel():
 
 
         # beta: The parameter controlling how often a susceptible-infected contact results in a new exposure.
-        self.beta = 0.0
+        self.beta = (r_t / t_inf)
         # gamma: The rate an infected recovers and moves into the resistant phase.
-        self.gamma = 0.0
-        # sigma: The rate at which an exposed person becomes infective.
-        self.sigma = 0.0
+        self.gamma = (1 / t_inf)
+        # alpha: The rate at which an exposed person becomes infective.
+        self.alpha = (1 / t_inc)
 
 
         # susceptiable ratio
@@ -60,12 +60,22 @@ class SEIRModel():
         self.r[0] = 0.0 / self.N
 
 
+        ### Adapted Parameter specialized for germany / county germany. ###
+        # Social Distancing Parameter
+        self.rho = rho
+        # Public containment
+        self.kappa_0 = kappa_0
+        # Quarantine measure only affecting infected people.
+        self.kappa = kappa
+
+
     def run(self):
         # Running the calcuation.
         for t in range(self.num_steps - 1):
-            self.s[t + 1] = self.s[t] - self.beta * self.s[t] * self.i[t]
-            self.e[t + 1] = self.e[t] + self.beta * self.s[t] * self.i[t] - self.sigma * self.e[t]
-            self.i[t + 1] = self.i[t] + self.sigma * self.e[t] - self.gamma * self.i[t]
+            self.s[t + 1] = self.s[t] - self.rho * self.beta * self.s[t] * self.i[t] - self.kappa_0 * self.s[t]
+            self.e[t + 1] = self.e[t] + self.rho * self.beta * self.s[t] * self.i[t] - self.alpha * self.e[t]
+                                      - self.kappa_0 * self.i[t] - self.kappa * self.i[t]
+            self.i[t + 1] = self.i[t] + self.alpha * self.e[t] - self.gamma * self.i[t]
             self.r[t + 1] = self.r[t] + self.gamma * self.i[t]
 
         '''
@@ -74,7 +84,7 @@ class SEIRModel():
 
 
     # Helper functions
-    def visulatization(self):
+    def visualization(self):
         # Visualizing the process. Just for testing it in the beginning.
         fig, ax = plt.subplots(figsize=(14,6))
         ax.plot(self.s, c='b', lw=2, label='S')
