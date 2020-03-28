@@ -94,13 +94,13 @@ class SEIRModel():
 
 
     # Helper functions
-    def visualization(self):
+    def visualization(self, n_pop = 1):
         # Visualizing the process. Just for testing it in the beginning.
         fig, ax = plt.subplots(figsize=(14,6))
-        ax.plot(self.s, c='b', lw=2, label='S')
-        ax.plot(self.e, c='orange', lw=2, label='E')
-        ax.plot(self.i, c='r', lw=2, label='I')
-        ax.plot(self.r, c='g', lw=2, label='R')
+        ax.plot(self.s*n_pop, c='b', lw=2, label='S')
+        ax.plot(self.e*n_pop, c='orange', lw=2, label='E')
+        ax.plot(self.i*n_pop, c='r', lw=2, label='I')
+        ax.plot(self.r*n_pop, c='g', lw=2, label='R')
 
         ax.set_xlabel('Day', fontsize=10)
         ax.set_ylabel('Individuals', fontsize=10)
