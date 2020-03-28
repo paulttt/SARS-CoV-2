@@ -70,13 +70,19 @@ class SEIRModel():
 
 
     def run(self):
-        # Running the calcuation.
+        '''
+        Running the calcuation.
+        '''
+
+        # deterministic
         for t in range(self.num_steps - 1):
             self.s[t + 1] = self.s[t] - self.rho * self.beta * self.s[t] * self.i[t] - self.kappa_0 * self.s[t]
             self.e[t + 1] = self.e[t] + self.rho * self.beta * self.s[t] * self.i[t] - self.alpha * self.e[t]
                                       - self.kappa_0 * self.i[t] - self.kappa * self.i[t]
             self.i[t + 1] = self.i[t] + self.alpha * self.e[t] - self.gamma * self.i[t]
             self.r[t + 1] = self.r[t] + self.gamma * self.i[t]
+
+        # stochastisch
 
         '''
             Applying a differnential equation solver (e.g. Runge–Kutta methods)
@@ -99,4 +105,20 @@ class SEIRModel():
         plt.xticks(fontsize=20)
         plt.yticks(fontsize=20)
         plt.legend()
-        plt.shwo()
+        plt.show()
+
+
+if __name__ == "__main__":
+    num_steps = 5
+    init_inf = 1
+    t_inc = 14
+    t_inf = 16
+    r_t = np.random.normal(2.5, 1.0)
+    print(r_t)
+    mu =
+    t_rec =
+    rho =
+    kappa_0 =
+    kappa =
+
+    seir = SEIRModel(num_steps, init_inf, t_inc, t_inf, r_t, mu, t_rec, rho, kappa_0, kappa)
