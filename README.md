@@ -36,7 +36,8 @@ We want to model every county's infected cases as a Markov Chain process, where 
 8) [Adding Local Connectivity into SEIR model](https://www.sciencedirect.com/science/article/abs/pii/S0025556413002113)
 
 ##### Parameter Distribution
-9) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
+9) [Offizielle Angaben des RKI zum SARS-CoV-2 Virus und Studien zum Verlauf der induzierten Covid-19 Erkrankung](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Steckbrief.html#doc13776792bodyText5)
+10) [Temporal profiles of viral load in posterior oropharyngeal saliva samples and serum antibody responses during infection by SARS-CoV-2: an observational cohort study](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30196-1/fulltext#seccestitle140)
 
 #### Datasets and APIs 
 
