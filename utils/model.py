@@ -7,7 +7,7 @@ class SEIRModel():
     '''
     Object representing the SEIR model functioning as an epidemic calculator.
     '''
-    def __init__(self, num_steps, init_inf, t_inc, t_inf, r_t, mu, t_rec, rho, kappa_0, kappa):
+    def __init__(self, num_steps, init_inf, t_inc, t_inf, r_t, rho, kappa_0, kappa):
         ### Call the DataLoader ###
         db = DataLoader()
         ### General ###
@@ -16,7 +16,9 @@ class SEIRModel():
 
         ### Transmission Dynamics ###
         # population
-        self.N = db.compute_population()
+        #self.N = float(db.compute_population())
+        self.N = 1e7 + 10 + 5
+        print(self.N)
         # Initial infection count
         self.init_inf = init_inf
         # t_inc: length of incubation period
@@ -28,9 +30,9 @@ class SEIRModel():
 
         ### Clinical Dynamics ###
         # mu: The natural mortality rate (this is unrelated to disease).
-        self.mu = mu
+        #self.mu = mu
         # t_rec: Recovery Times - Length of hospital stay
-        self.t_rec = t_rec
+        #self.t_rec = t_rec
 
 
         # beta: The parameter controlling how often a susceptible-infected contact results in a new exposure.
@@ -57,7 +59,7 @@ class SEIRModel():
         # Initial infected: The number of infected individuals at the beginning of the model run.
         self.i[0] = self.init_inf / self.N
         # Initial recovered: The number of recovered individuals at the beginning of the model run.
-        self.r[0] = 0.0 / self.N
+        #self.r[0] = 0.0 / self.N
 
 
         ### Adapted Parameter specialized for germany / county germany. ###
@@ -77,7 +79,7 @@ class SEIRModel():
         # deterministic
         for t in range(self.num_steps - 1):
             self.s[t + 1] = self.s[t] - self.rho * self.beta * self.s[t] * self.i[t] - self.kappa_0 * self.s[t]
-            self.e[t + 1] = self.e[t] + self.rho * self.beta * self.s[t] * self.i[t] - self.alpha * self.e[t]
+            self.e[t + 1] = self.e[t] + self.rho * self.beta * self.s[t] * self.i[t] - self.alpha * self.e[t] \
                                       - self.kappa_0 * self.i[t] - self.kappa * self.i[t]
             self.i[t + 1] = self.i[t] + self.alpha * self.e[t] - self.gamma * self.i[t]
             self.r[t + 1] = self.r[t] + self.gamma * self.i[t]
@@ -87,6 +89,8 @@ class SEIRModel():
         '''
             Applying a differnential equation solver (e.g. Runge–Kutta methods)
         '''
+
+        return (self.s, self.e, self.i, self.r)
 
 
     # Helper functions
@@ -109,16 +113,22 @@ class SEIRModel():
 
 
 if __name__ == "__main__":
-    num_steps = 5
-    init_inf = 1
+    num_steps = 500
+    init_inf = 1000
     t_inc = 14
-    t_inf = 16
+    t_inf = 12
     r_t = np.random.normal(2.5, 1.0)
     print(r_t)
-    mu =
-    t_rec =
-    rho =
-    kappa_0 =
-    kappa =
+    rho = 1.0
+    kappa_0 = 0.0
+    kappa = 0.0
 
-    seir = SEIRModel(num_steps, init_inf, t_inc, t_inf, r_t, mu, t_rec, rho, kappa_0, kappa)
+    seir = SEIRModel(num_steps, init_inf, t_inc, t_inf, r_t, rho, kappa_0, kappa)
+
+    s, e, i, r = seir.run()
+    print("s: ", s)
+    print("e: ", s)
+    print("i: ", s)
+    print("r: ", s)
+
+    seir.visualization()
