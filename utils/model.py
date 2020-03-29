@@ -7,7 +7,7 @@ class SEIRModel():
     '''
     Object representing the SEIR model functioning as an epidemic calculator.
     '''
-    def __init__(self, num_steps, init_inf, t_inc, t_inf, r_t, rho, kappa_0, kappa):
+    def __init__(self, num_steps, N , init_inf, t_inc, t_inf, r_t, rho, kappa_0, kappa):
         ### Call the DataLoader ###
         db = DataLoader()
         ### General ###
@@ -17,7 +17,7 @@ class SEIRModel():
         ### Transmission Dynamics ###
         # population
         #self.N = float(db.compute_population())
-        self.N = 1e7 + 10 + 5
+        self.N = N
         print(self.N)
         # Initial infection count
         self.init_inf = init_inf
@@ -53,9 +53,9 @@ class SEIRModel():
         self.r = np.zeros([self.num_steps])
 
         # Initial susceptible: The number of susceptible individuals at the beginning of the model run.
-        self.s[0] = 1e7 / self.N
+        self.s[0] = 1.0-(self.init_inf / self.N)
         # Initial exposed: The number of exposed individuals at the beginning of the model run.
-        self.e[0] = 40.0 / self.N
+        #self.e[0] = 0.0 / self.N
         # Initial infected: The number of infected individuals at the beginning of the model run.
         self.i[0] = self.init_inf / self.N
         # Initial recovered: The number of recovered individuals at the beginning of the model run.
@@ -114,16 +114,17 @@ class SEIRModel():
 
 if __name__ == "__main__":
     num_steps = 500
-    init_inf = 1000
-    t_inc = 14
-    t_inf = 12
-    r_t = np.random.normal(2.5, 1.0)
-    print(r_t)
+    init_inf = 5
+    t_inc = 5
+    t_inf = 9
+    r_t = 2.5 #np.random.normal(2.5, 1.0)
     rho = 1.0
     kappa_0 = 0.0
     kappa = 0.0
+    
+    n_pop = 2000
 
-    seir = SEIRModel(num_steps, init_inf, t_inc, t_inf, r_t, rho, kappa_0, kappa)
+    seir = SEIRModel(num_steps,n_pop, init_inf, t_inc, t_inf, r_t, rho, kappa_0, kappa)
 
     s, e, i, r = seir.run()
     print("s: ", s)
