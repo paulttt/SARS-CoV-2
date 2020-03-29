@@ -17,9 +17,10 @@ from utils import DB_interface as DBI
 from utils import path_config as pc
 from utils import model
 
-
-tmplt_path = pc.get_template_path()
-app = Flask(__name__)
+TEMPLATE_DIR = os.path.abspath(os.path.join(currentdir, 'templates'))
+STATIC_DIR = os.path.abspath(os.path.join(TEMPLATE_DIR, 'static'))
+#tmplt_path = pc.get_template_path()
+app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
 #seir = model.SEIRModel()
 
