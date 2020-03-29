@@ -19,7 +19,7 @@ from utils import model
 
 
 tmplt_path = pc.get_template_path()
-app = Flask(__name__, template_folder=tmplt_path)
+app = Flask(__name__)
 
 #seir = model.SEIRModel()
 
@@ -27,6 +27,7 @@ app = Flask(__name__, template_folder=tmplt_path)
 def index():
     return render_template("index.html")
 
+"""
 @app.route('/start_bckgrnd_update')
 def start_bckgrnd_update():
     p = Process(target=bckgrnd_update, name="background_update")
@@ -67,7 +68,7 @@ def bckgrnd_update():
         day = 24 * 3600
         time.sleep(day)
 
-
+"""
 
 if __name__ == "__main__":
     app.run(debug=True)
