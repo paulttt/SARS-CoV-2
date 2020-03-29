@@ -7,27 +7,19 @@ sys.path.append(os.path.join(parentdir, "utils"))
 
 # Import important helper libraries.
 from flask import Flask, render_template
-from multiprocessing import Process
-import waitress
-import time
-from datetime import datetime
 
 # Import modules created to serve the project.
-from utils import DB_interface as DBI
-from utils import path_config as pc
-from utils import model
+#from utils import DB_interface as DBI
+#from utils import path_config as pc
+#from utils import model
 
-TEMPLATE_DIR = os.path.abspath(os.path.join(currentdir, 'templates'))
-STATIC_DIR = os.path.abspath(os.path.join(TEMPLATE_DIR, 'static'))
-#tmplt_path = pc.get_template_path()
-app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
-#seir = model.SEIRModel()
+app = Flask(__name__)
 
 @app.route('/')
 def index():
     return render_template("index.html")
-
+	
 """
 @app.route('/start_bckgrnd_update')
 def start_bckgrnd_update():
@@ -70,7 +62,6 @@ def bckgrnd_update():
         time.sleep(day)
 
 """
-
+	
 if __name__ == "__main__":
     app.run(debug=True)
-    #waitress.serve(app)
