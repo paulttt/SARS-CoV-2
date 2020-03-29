@@ -1,28 +1,31 @@
+# Set up path references and dependencies.
+import os, sys, inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir)
+sys.path.append(os.path.join(parentdir, "utils"))
+
+# Import important helper libraries.
 from flask import Flask, render_template
 from multiprocessing import Process
 import waitress
 import time
 from datetime import datetime
+
+# Import modules created to serve the project.
 from utils import DB_interface as DBI
 from utils import path_config as pc
+from utils import model
+
 
 tmplt_path = pc.get_template_path()
 app = Flask(__name__, template_folder=tmplt_path)
 
+#seir = model.SEIRModel()
+
 @app.route('/')
-def hello_world():
-    user = {'username': 'MSE!'}
-    posts = [
-        {
-            'author': {'username': 'Paul'},
-            'body': 'Henrik stinkt wie sau'
-        },
-        {
-            'author': {'username': 'Henrik'},
-            'body': 'Ja, aber nach Fisch!'
-        }
-    ]
-    return render_template("index.html", title="home", user = user, posts=posts)
+def index():
+    return render_template("index.html")
 
 @app.route('/start_bckgrnd_update')
 def start_bckgrnd_update():
@@ -61,10 +64,11 @@ def bckgrnd_update():
         DB = DBI.DB_interface()
         DB.update_RKI_csv()
         DB.update_RKI_landkreise_csv()
-        day = 24*3600 #seconds in a day
+        day = 24 * 3600
         time.sleep(day)
 
 
 
 if __name__ == "__main__":
-    waitress.serve(app)
+    app.run(debug=True)
+    #waitress.serve(app)
