@@ -41,12 +41,12 @@ def compute_model_output():
 
     s, e, i, r = seir.run()
 
-    days = np.linspace(0, 1, num_steps)
+    days = np.linspace(0, num_steps, num_steps)
 
-    trace_0 = pgo.Scatter(x=days, y=s, mode='lines', name='s', line=dict(color='rgba(245, 80, 15, 1)'))
-    trace_1 = pgo.Scatter(x=days, y=e, mode='lines', name='e', line=dict(color='rgba(30, 80, 65, 1)'))
-    trace_2 = pgo.Scatter(x=days, y=i, mode='lines', name='i', line=dict(color='rgba(0, 90, 35, 1)'))
-    trace_3 = pgo.Scatter(x=days, y=r, mode='lines', name='r', line=dict(color='rgba(140, 90, 30, 1)'))
+    trace_0 = pgo.Scatter(x=days, y=s, mode='lines', name='s', line=dict(color='rgba(128, 223, 255, 1)'))
+    trace_1 = pgo.Scatter(x=days, y=e, mode='lines', name='e', line=dict(color='rgba(200, 100, 0, 1)'))
+    trace_2 = pgo.Scatter(x=days, y=i, mode='lines', name='i', line=dict(color='rgba(180, 0, 0, 1)'))
+    trace_3 = pgo.Scatter(x=days, y=r, mode='lines', name='r', line=dict(color='rgba(0, 100, 50, 1)'))
 
     data = [trace_0, trace_1, trace_2, trace_3]
 
