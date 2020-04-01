@@ -7,9 +7,9 @@ from arcgis.gis import GIS
 import os
 from shutil import copyfile
 import pandas as pd
-from . import path_config as pc
+import path_config as pc
 from datetime import datetime
-
+import chardet
 
 
 class DB_interface:
@@ -49,8 +49,9 @@ class DB_interface:
         df_new = pd.read_csv("temp.temp")
         os.remove("temp.temp")
         sorted_new = df_new.reindex(sorted(df_new.columns), axis=1)
-
-        df_old = pd.read_csv(RKI_landkreise_file)
+        with open(RKI_landkreise_file, 'rb') as f:
+            result = chardet.detect(f.read())  # or readline if the file is large
+        df_old = pd.read_csv(RKI_landkreise_file, encoding=result['encoding'])
         sorted_old = df_old.reindex(sorted(df_old.columns), axis=1)
 
         #compare new rows with all old row and drop exact duplicates
