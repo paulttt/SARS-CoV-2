@@ -15,7 +15,7 @@ end = datetime.datetime.today()
 #df = pd.read_csv("TimeSeriesData.csv")
 
 trace_close = go.Scatter(x = list(df.index),
-                         y = list(df.data)
+                         y = list(df.data),
                          name="Infections",
                          line=dict(color="#eb7434")
 
@@ -122,7 +122,7 @@ def update_plot_cum_metrics(country, state, metrics):
 server = app.server
 
 if __name__ == '__main__':
-    app.run_server(host="0.0.0.0", debug=True)
+    app.run_server(debug=True)
 """
 app = dash.Dash()
 

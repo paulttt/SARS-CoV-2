@@ -20,6 +20,9 @@ from utils import model
 
 app = Flask(__name__)
 
+# Global variable
+#DAYS = 500
+
 @app.route('/')
 def index():
     result_plot = compute_model_output()
@@ -54,10 +57,13 @@ def compute_model_output():
 
     return (graphJSON)
 
-
-
-
 """
+@app.callback(
+    Output('test','children')
+    [Input('val_num_steps', 'num_steps')]
+)
+
+
 @app.route('/start_bckgrnd_update')
 def start_bckgrnd_update():
     p = Process(target=bckgrnd_update, name="background_update")
@@ -97,7 +103,6 @@ def bckgrnd_update():
         DB.update_RKI_landkreise_csv()
         day = 24 * 3600
         time.sleep(day)
-
 """
 
 if __name__ == "__main__":
