@@ -149,8 +149,8 @@ if __name__ == "__main__":
 
     s, e, i, r = seir.run()
     print("s: ", s)
-    print("e: ", s)
-    print("i: ", s)
-    print("r: ", s)
+    print("e: ", e)
+    print("i: ", i)
+    print("r: ", r)
 
     seir.visualization()

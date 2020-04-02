@@ -7,19 +7,56 @@ sys.path.append(os.path.join(parentdir, "utils"))
 
 # Import important helper libraries.
 from flask import Flask, render_template
+import numpy as np
+
+import plotly
+import plotly.graph_objs as pgo
+import json
 
 # Import modules created to serve the project.
 #from utils import DB_interface as DBI
 #from utils import path_config as pc
-#from utils import model
-
+from utils import model
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
-	
+    result_plot = compute_model_output()
+    return render_template("index.html", graphJSON=result_plot)
+
+def compute_model_output():
+    num_steps = 500
+    init_inf = 5
+    t_inc = 5
+    t_inf = 9
+    r_t = 2.5 #np.random.normal(2.5, 1.0)
+    rho = 1.0
+    kappa_0 = 0.0
+    kappa = 0.0
+
+    n_pop = 2000
+
+    seir = model.SEIRModel(num_steps,n_pop, init_inf, t_inc, t_inf, r_t, rho, kappa_0, kappa)
+
+    s, e, i, r = seir.run()
+
+    days = np.linspace(0, num_steps, num_steps)
+
+    trace_0 = pgo.Scatter(x=days, y=s, mode='lines', name='s', line=dict(color='rgba(128, 223, 255, 1)'))
+    trace_1 = pgo.Scatter(x=days, y=e, mode='lines', name='e', line=dict(color='rgba(200, 100, 0, 1)'))
+    trace_2 = pgo.Scatter(x=days, y=i, mode='lines', name='i', line=dict(color='rgba(180, 0, 0, 1)'))
+    trace_3 = pgo.Scatter(x=days, y=r, mode='lines', name='r', line=dict(color='rgba(0, 100, 50, 1)'))
+
+    data = [trace_0, trace_1, trace_2, trace_3]
+
+    graphJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return (graphJSON)
+
+
+
+
 """
 @app.route('/start_bckgrnd_update')
 def start_bckgrnd_update():
@@ -62,6 +99,6 @@ def bckgrnd_update():
         time.sleep(day)
 
 """
-	
+
 if __name__ == "__main__":
     app.run(debug=True)

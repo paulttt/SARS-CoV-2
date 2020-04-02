@@ -134,6 +134,13 @@ Author: Daniel Illner - illner.d@protonmail.com
   width: 170px;
   margin: 20px auto 5px;
 }
+.chart
+{
+  /*margin-top: 200px;*/
+  text-align: center;
+  min-width:50px;
+  display: inline;
+}
 
 /* ----- Footer ----- */
 #Footer
