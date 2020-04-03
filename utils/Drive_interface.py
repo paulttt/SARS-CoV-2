@@ -1,3 +1,6 @@
+"""
+Author: Theo Bernier
+"""
 from __future__ import print_function
 import pickle
 import os.path
@@ -10,7 +13,6 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from apiclient.http import MediaFileUpload, MediaIoBaseDownload
-
 
 class Drive():
     def __init__(self):
@@ -58,9 +60,9 @@ class Drive():
             raise FileExistsError("file 'token.pickle' does not exist, token couldn't be refreshed")
         self.creds = creds
 
-    def list_files(self):
+    def list_files(self, pageSize = 10):
         results = self.service.files().list(
-            pageSize=10, fields="nextPageToken, files(id, name)").execute()
+            pageSize=pageSize, fields="nextPageToken, files(id, name)").execute()
         items = results.get('files', [])
 
         if not items:
@@ -95,9 +97,13 @@ class Drive():
 
     def download_latest_file(self, filename, destination, days_back=5):
         """
-        :param filename: filename without extension!!!
+        In Drive, files are named according to "name_year-month-day.extension" at which they were uploaded
+        Provide filename as name.extension and this function will automatically download the newest version checking
+        back a certain number of days.
+        :param filename: filename without date! e.g. RKI_Corona_Landkreise_updated.csv
+        :param destination: destination path for downloaded file
         :param days_back: how many days should be checked back into past for latest version
-        :return:
+
         """
         #path = Path(filename)
         name, extension = os.path.splitext(filename)
@@ -145,5 +151,11 @@ if __name__=="__main__":
     path = pc.get_RKI_landkreise_file()
     filename = path.name
     mimetype, encoding = mimetypes.guess_type(path)
-    #drive.upload_file(service, path, filename, mimetype)
-    drive.list_files()
+
+    landkreise = pc.get_RKI_landkreise_file()
+    landkreiseName = landkreise.name
+    drive = Drive()
+    # Commented out because given as usage example
+    # drive.upload_file(service, path, filename, mimetype)
+    # drive.download_latest_file(landkreiseName, landkreise)
+    drive.list_files(pageSize = 10) #print list of first 10 files
