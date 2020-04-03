@@ -11,6 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/7d6f0e24d8.js" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
   </head>
   <body>
 
@@ -98,9 +102,27 @@
     <section id="project">
       <div class="container">
         <h1>Epidemic Calculator</h1>
-        <div class="about-content">
-          **** HIER SOLLEN DIE ERGEBNISSE DES MODELS ***
+        <div id="chart", class="chart">
+          <script type="text/javascript">
+        		var graphs = {{ graphJSON|safe }};
+        		Plotly.plot('chart', graphs, {});
+        	</script>
         </div>
+
+        <div class="slidecontainer">
+          <input type="range" min="1" max="500" value="100" class="slider" id="slider_num_steps">
+          <p>simulation time [days]: <span id="val_num_steps"></span></p>
+        </div>
+
+        <script>
+          var slider = document.getElementById("slider_num_steps");
+          var num_steps = document.getElementById("val_num_steps");
+          num_steps.innerHTML = slider.value;
+
+          slider.oninput = function() {
+            num_steps.innerHTML = this.value;
+          }
+        </script>
       </div>
     </section>
 
@@ -113,4 +135,6 @@
 
 
   </body>
+
+
 </html>

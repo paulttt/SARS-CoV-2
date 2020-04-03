@@ -4,7 +4,6 @@ Author: Theo Bernier - theo.ju.bern@gmail.com
 """
 from pathlib import Path
 
-
 file=Path(__file__)
 ROOT_PATH = file.parent.parent
 DATA_PATH = ROOT_PATH.joinpath("data")
@@ -28,6 +27,7 @@ def get_Landkreise_file():
 def get_altersgruppen_geschlecht():
     altersgruppen_geschlecht_filename = "Altersgruppen_Geschlecht.csv"
     return DATA_PATH.joinpath(altersgruppen_geschlecht_filename)
+
 def get_template_path():
     template_dir = "templates"
     return ROOT_PATH.joinpath(template_dir)
