@@ -5,9 +5,8 @@ Author: Theo Bernier - theo.ju.bern@gmail.com
 
 from arcgis.gis import GIS
 import os
-from shutil import copyfile
 import pandas as pd
-import path_config as pc
+import utils.path_config as pc
 from datetime import datetime
 import chardet
 

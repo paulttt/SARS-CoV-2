@@ -4,6 +4,8 @@ import os.path
 import utils.path_config as pc
 import mimetypes
 import io
+from pathlib import Path
+from datetime import datetime, timedelta
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -20,12 +22,14 @@ class Drive():
         """Shows basic usage of the Drive v3 API.
             Prints the names and ids of the first 10 files the user has access to.
             """
+        auth_path=pc.get_auth_path()
         creds = None
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
+        pickle_path = auth_path.joinpath('token.pickle')
+        if pickle_path.exists():
+            with open(pickle_path, 'rb') as token:
                 creds = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
@@ -33,7 +37,7 @@ class Drive():
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', self.SCOPES)
+                    auth_path.joinpath('credentials.json'), self.SCOPES)
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
@@ -41,15 +45,16 @@ class Drive():
 
         service = build('drive', 'v3', credentials=creds)
     def refresh_token(self):
-        try:
-            os.path.exists('auth/token.pickle')
-            with open('auth/token.pickle', 'rb') as token:
+        auth_path = pc.get_auth_path()
+        pickle_path = auth_path.joinpath('token.pickle')
+        if pickle_path.exists():
+            with open(pickle_path, 'rb') as token:
                 creds = pickle.load(token)
             if creds and creds.refresh_token:
                 creds.refresh(Request())
             else:
                 raise Warning("couldn't refresh token!")
-        except:
+        else:
             raise FileExistsError("file 'token.pickle' does not exist, token couldn't be refreshed")
         self.creds = creds
 
@@ -76,16 +81,64 @@ class Drive():
                                       fields='id').execute()
         print('uploaded file with File ID: %s' % file.get('id'))
 
-    def download_file(self,):
-        file_id = '0BwwA4oUTeiV1UVNwOHItT0xfa2M'
+    def get_file_id(self, filename):
+        results = self.service.files().list(
+            pageSize=1000, fields="nextPageToken, files(id, name)").execute()
+        items = results.get('files', [])
+        matches = []
+        for item in items:
+            if item['name'] == filename:
+                matches.append(item['id'])
+
+        return matches
+
+
+    def download_latest_file(self, filename, destination, days_back=5):
+        """
+        :param filename: filename without extension!!!
+        :param days_back: how many days should be checked back into past for latest version
+        :return:
+        """
+        #path = Path(filename)
+        name, extension = os.path.splitext(filename)
+        found = False
+        # str repr of today's date, precise to the day
+        day = datetime.today()
+        day_str = day.__str__()[:10]
+        day_limit = day - timedelta(days=days_back+1)
+        while not found and day > day_limit:
+            filename_w_date = name+"_"+day_str+extension
+            print(filename_w_date)
+            ID = self.get_file_id(filename_w_date)
+            if len(ID)==1:
+                print("match found for file %s at date %s" % (name, day_str))
+                self.download_file(ID[0], destination)
+                found = True
+            elif len(ID)>1:
+                lastID = id[-1]
+                print(
+                    "Several name matches found with that filename for date %s, taking last id of the list: %s" % (day.__str()[:10], lastID)
+                    )
+                self.download_file(lastID, destination)
+                found = True
+            else:
+                print("no match found for date %s, checking previous day..." % day_str)
+                day = day - timedelta(days=1)
+                day_str = day.__str__()[:10]
+
+        if not found:
+            print("No match found within %s days of today. Go back further or check filename" % days_back)
+
+
+    def download_file(self, file_id, download_destination):
         request = self.service.files().get_media(fileId=file_id)
-        fh = io.BytesIO()
-        downloader = MediaIoBaseDownload(fh, request)
-        done = False
-        while done is False:
-            status, done = downloader.next_chunk()
-            print
-            "Download %d%%." % int(status.progress() * 100)
+        with open(download_destination, "wb") as fh:
+            downloader = MediaIoBaseDownload(fh, request)
+            done = False
+            while done is False:
+                status, done = downloader.next_chunk()
+                print
+                "Download %d%%." % int(status.progress() * 100)
 
 if __name__=="__main__":
     drive = Drive()

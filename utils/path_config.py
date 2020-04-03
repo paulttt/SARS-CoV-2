@@ -31,3 +31,5 @@ def get_altersgruppen_geschlecht():
 def get_template_path():
     template_dir = "templates"
     return ROOT_PATH.joinpath(template_dir)
+def get_auth_path():
+    return ROOT_PATH.joinpath("utils/auth")
